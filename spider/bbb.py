@@ -18,3 +18,7 @@ url = '{baseurl}/in_theaters?apikey={apikey}&city={city}&start={start}&count={co
 link = url.format(baseurl=res['baseUrl'],apikey=res['apikey'],city="温州",start=0,count=2)
 r = requests.get(link)
 print(r.json())
+
+
+
+
