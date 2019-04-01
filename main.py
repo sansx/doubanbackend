@@ -17,11 +17,6 @@ def getconfig():
         res = json.load(f)
     return res
 
-# conn = connect.connectsql()
-# cursor = conn.cursor()
-# cursor.execute("select * fro1m user")
-# values = cursor.fetchall()
-
 
 def getMovieInfo(count):
     res = getconfig()
@@ -37,16 +32,30 @@ def getMovieInfo(count):
 
 
 res = getMovieInfo(2)
+conn = connectsql(getsqlconfig())
+cursor = conn.cursor()
 # print(res)
 if res:
     count = res["total"]
     try:
         re = getMovieInfo(count)
+        # print(json.dumps(re["subjects"], ensure_ascii=False, indent=2))
+        # cursor.execute('select * from movies')
+        # values = cursor.fetchall()
+        # print(values) 
         with open("moviedata.json", "wt") as f:
-            f.write(json.dumps(re["subjects"], ensure_ascii=False, indent=2))
+            f.write("aaa")
+            pass
         for info in re["subjects"]:
-            print(info["title"], info["original_title"], info["durations"], info["id"])
+            print(info["title"], info["original_title"],
+                  info["durations"], info["id"])
+            print("insert into movies (movie_id,original_title,title,durations) values ({}, '{}','{}','{}') where movie_id={} not in (select movie_id from movies)".format(info["id"], info["original_title"], info["title"], json.dumps(info["durations"]), info["id"]))
+            cursor.execute(
+                "insert into movies (movie_id,original_title,title,durations) values (%s, %s,%s,%s) where %s not in (select movie_id from movies)",
+                [info["id"], info["original_title"], info["title"], json.dumps(info["durations"]), info["id"]])
+            conn.commit()
+        cursor.close()
+        conn.close()
     except:
         pass
     # getMovieInfo(count)
-    
