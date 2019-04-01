@@ -9,7 +9,7 @@ def getsqlconfig():
     return res
 
 
-connectsql(getsqlconfig())
+# connectsql(getsqlconfig())
 
 
 def getconfig():
@@ -28,17 +28,25 @@ def getMovieInfo(count):
     try:
         url = '{baseurl}/in_theaters?apikey={apikey}&city={city}&start={start}&count={count}&client=&udid='
         link = url.format(baseurl=res['baseUrl'],
-                        apikey=res['apikey'], city="温州", start=0, count=count)
+                          apikey=res['apikey'], city="温州", start=0, count=count)
         r = requests.get(link)
         return r.json()
         pass
     except:
         pass
 
+
 res = getMovieInfo(2)
+# print(res)
 if res:
     count = res["total"]
-    with open("","") as target:
+    try:
+        re = getMovieInfo(count)
+        with open("moviedata.json", "wt") as f:
+            f.write(json.dumps(re["subjects"], ensure_ascii=False, indent=2))
+        for info in re["subjects"]:
+            print(info["title"], info["original_title"], info["durations"], info["id"])
+    except:
         pass
-    print(count)
-    pass
+    # getMovieInfo(count)
+    

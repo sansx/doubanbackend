@@ -1,4 +1,4 @@
-import mysql.connector as myconn
+import pymysql as myconn
 # import json
 # import sys
 
