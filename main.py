@@ -14,7 +14,7 @@ def getconfig():
         res = json.load(f)
     return res
 
-def getMovieInfo(count):
+def getMovielist(count):
     res = getconfig()
     try:
         url = '{baseurl}/in_theaters?apikey={apikey}&city={city}&start={start}&count={count}&client=&udid='
@@ -27,14 +27,14 @@ def getMovieInfo(count):
         pass
 
 
-res = getMovieInfo(2)
+res = getMovielist(2)
 conn = connectsql(getsqlconfig())
 cursor = conn.cursor()
 # print(res)
 if res:
     count = res["total"]
     try:
-        re = getMovieInfo(count)
+        re = getMovielist(count)
         # print(json.dumps(re["subjects"], ensure_ascii=False, indent=2))
         # cursor.execute('select * from movies')
         # values = cursor.fetchall()
@@ -58,4 +58,4 @@ if res:
         conn.close()
     except:
         pass
-    # getMovieInfo(count)
+    # getMovielist(count)
