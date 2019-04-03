@@ -12,7 +12,7 @@ import pymysql as myconn
 def connectsql(config):
     if config['database']:
         conn = myconn.connect(
-            user=config['user'], password=config['password'], database=config['database'])
+            user=config['user'], password=config['password'], database=config['database'],charset='utf8')
         return conn
 
 
