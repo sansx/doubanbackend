@@ -42,7 +42,9 @@ def getAll(type="hot",limit=50):
             arr=[]
             page = ceil(count/limit)
             for i in range(page):
-                arr.append(getMovielist(limit,start=i*limit, type=type))
+                re=getMovielist(limit,start=i*limit, type=type)
+                print(re["total"])
+                arr.append(re)
                 sleep(5)
                 pass
             return arr
