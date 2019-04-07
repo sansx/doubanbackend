@@ -1,0 +1,10 @@
+Create Table | CREATE TABLE `movies` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
+  `original_title` varchar(200) NOT NULL,
+  `durations` varchar(300) DEFAULT NULL,
+  `movie_id` int(100) NOT NULL,
+  `hot` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `movie_id` (`movie_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=277 DEFAULT CHARSET=utf8
