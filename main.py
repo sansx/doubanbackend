@@ -12,7 +12,6 @@ def getsqlconfig():
 
 # connectsql(getsqlconfig())
 
-
 def getconfig():
     with open('config.json', "r") as f:
         res = json.load(f)
@@ -21,7 +20,7 @@ def getconfig():
 
 def getMovielist(count, start=0, type="hot"):
     urlDir = {"hot": '{baseurl}/in_theaters?apikey={apikey}&city={city}&start={start}&count={count}&client=&udid=',
-              "top": '{baseurl}/top250?apikey={apikey}&city={city}&start={start}&count={count}&client=&udid='}
+              "top": '{baseurl}/top250?apikey={apikey}&start={start}&count={count}&client=&udid='}
     res = getconfig()
     try:
         url = urlDir[type]
@@ -43,7 +42,7 @@ def getAll(type="hot",limit=50):
             page = ceil(count/limit)
             for i in range(page):
                 re=getMovielist(limit,start=i*limit, type=type)
-                print(re["total"])
+                print("start:{},count:{},num:{}".format(re["start"],re["count"],len(re["subjects"])))
                 arr.append(re)
                 sleep(5)
                 pass
@@ -55,8 +54,8 @@ def getAll(type="hot",limit=50):
             pass
 
 
-def inputJson(*, fileName, info):
-    with open("moviedata.json", "wt") as f:
+def inputJson(*, fileName="moviedata.json", info):
+    with open(fileName, "at+", encoding="utf-8") as f:
         f.write(json.dumps(info, ensure_ascii=False, indent=2))
         pass
 
@@ -85,11 +84,19 @@ if __name__ == "__main__":
             conn.commit()
         except:
             conn.rollback()
-    res = getAll(type="top")
+    res = getAll(type="top",limit=100)
     print("添加top250电影中。。。")
     if type(res)==list:
         for i in res:
             for info in i["subjects"]:
+                for key in info:
+                    if type(info[key])==str and "'" in info[key]: 
+                        info[key]=info[key].replace("'","\\'")
+                    if key=="durations" and info[key] is None:
+                        print(info["title"])
+                        
+                    # print("insert into movies (movie_id,original_title,title,durations) values ({}, '{}','{}','{}')".format(
+                    # info["id"], info["original_title"], info["title"], json.dumps(info["durations"]), info["id"]))
                 try:
                     cursor.execute(
                         "insert into movies (movie_id,original_title,title,durations) \
@@ -97,6 +104,7 @@ if __name__ == "__main__":
                         (info["id"], info["original_title"], info["title"], json.dumps(info["durations"])))
                     conn.commit()
                 except:
+                    # inputJson(info=",{}".format(info))
                     conn.rollback()
     cursor.close()
     conn.close()
