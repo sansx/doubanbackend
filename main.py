@@ -69,15 +69,13 @@ if __name__ == "__main__":
     # print(re)
     cursor.execute("truncate movies")
     for info in re["subjects"]:
-        print(info["title"], info["id"], info["rating"]["average"],
-              json.dumps(info["rating"]["details"]).replace("\"", "\\\""))
         # print(json.dumps(re["subjects"], ensure_ascii=False, indent=2))
         # cursor.execute('select * from movies')
         # values = cursor.fetchall()
         # print(values)
-        print("insert into movies (movie_id,original_title,title,durations,average,details) values ({}, '{}','{}','{}',{},{})".format(
-            info["id"], info["original_title"], info["title"], json.dumps(info["durations"]),
-            info["rating"]["average"], json.dumps(info["rating"]["details"]).replace("\'", "\\'")))
+        # print("insert into movies (movie_id,original_title,title,durations,average,details) values ({}, '{}','{}','{}',{},{})".format(
+        #     info["id"], info["original_title"], info["title"], json.dumps(info["durations"]),
+        #     info["rating"]["average"], json.dumps(info["rating"]["details"]).replace("\'", "\\'")))
         try:
             cursor.execute(
                 "insert into movies (movie_id,original_title,title,durations,hot,average,details) \
@@ -88,27 +86,27 @@ if __name__ == "__main__":
             conn.commit()
         except:
             conn.rollback()
-    # res = getAll(type="top",limit=100)
+    res = getAll(type="top", limit=100)
 
-    # print("添加top250电影中。。。")
-    # if type(res)==list:
-    #     for i in res:
-    #         for info in i["subjects"]:
-    #             for key in info:
-    #                 if type(info[key])==str and "'" in info[key]:
-    #                     info[key]=info[key].replace("'","\\'")
-    #                 if key=="durations" and info[key] is None:
-    #                     print(info["title"])
-    #                 # print("insert into movies (movie_id,original_title,title,durations) values ({}, '{}','{}','{}')".format(
-    #                 # info["id"], info["original_title"], info["title"], json.dumps(info["durations"]), info["id"]))
-    #             try:
-    #                 cursor.execute(
-    #                     "insert into movies (movie_id,original_title,title,durations) \
-    #                     values (%s, '%s','%s','%s')" %
-    #                     (info["id"], info["original_title"], info["title"], json.dumps(info["durations"])))
-    #                 conn.commit()
-    #             except:
-    #                 # inputJson(info=",{}".format(info))
-    #                 conn.rollback()
+    print("添加top250电影中。。。")
+    if type(res) == list:
+        for i in res:
+            for info in i["subjects"]:
+                for key in info:
+                    if type(info[key]) == str and "'" in info[key]:
+                        info[key] = info[key].replace("'", "\\'")
+                    if key == "durations" and info[key] is None:
+                        print(info["title"])
+                    # print("insert into movies (movie_id,original_title,title,durations) values ({}, '{}','{}','{}')".format(
+                    # info["id"], info["original_title"], info["title"], json.dumps(info["durations"]), info["id"]))
+                try:
+                    cursor.execute("insert into movies (movie_id,original_title,title,durations,average,details) \
+                        values (%s, '%s','%s','%s', %s, '%s')" %
+                        (info["id"], info["original_title"], info["title"], json.dumps(info["durations"]),
+                        info["rating"]["average"], str(info["rating"]["details"]).replace("\'", "\\'")))
+                    conn.commit()
+                except:
+                    # inputJson(info=",{}".format(info))
+                    conn.rollback()
     cursor.close()
     conn.close()
