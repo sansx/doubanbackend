@@ -56,8 +56,8 @@ def getAll(type="hot", limit=50):
             pass
 
 
-def inputJson(*, fileName="moviedata.json", info):
-    with open(fileName, "at+", encoding="utf-8") as f:
+def inputJson(*, fileName="moviedata.json", info, type="wt"):
+    with open(fileName, type, encoding="utf-8") as f:
         f.write(json.dumps(info, ensure_ascii=False, indent=2))
         pass
 
@@ -110,3 +110,10 @@ if __name__ == "__main__":
                     conn.rollback()
     cursor.close()
     conn.close()
+
+
+
+
+
+
+
