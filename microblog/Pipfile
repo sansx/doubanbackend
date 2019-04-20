@@ -1,6 +1,6 @@
 [[source]]
 name = "pypi"
-url = "https://mirrors.aliyun.com/pypi/simple"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 verify_ssl = true
 
 [dev-packages]
@@ -16,6 +16,7 @@ sqlalchemy = "*"
 wtforms = "*"
 flask-mail = "*"
 pyjwt = "*"
+flask-bootstrap = "*"
 
 [requires]
 python_version = "3.7"
