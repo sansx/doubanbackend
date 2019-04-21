@@ -103,4 +103,4 @@ mysql.json
 # mypy
 .mypy_cache/
 
-# .flaskenv
+.flaskenv
