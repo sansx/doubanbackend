@@ -7,6 +7,7 @@ from flask_mail import Mail
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
 import os
 
 
@@ -19,6 +20,8 @@ mail = Mail(app)
 bootstrap = Bootstrap(app)
 login = LoginManager(app)
 login.login_view = 'login'
+moment = Moment(app)
+
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
