@@ -8,7 +8,6 @@ import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
-from app.errors import bp as errors_bp
 import os
 
 
@@ -22,6 +21,7 @@ bootstrap = Bootstrap(app)
 login = LoginManager(app)
 login.login_view = 'login'
 moment = Moment(app)
+from app.errors import bp as errors_bp
 app.register_blueprint(errors_bp)
 
 if not app.debug:
