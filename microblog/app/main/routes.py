@@ -3,11 +3,9 @@ from flask import render_template, flash, redirect, url_for, request, g, \
     jsonify, current_app
 from flask_login import current_user, login_required
 # from flask_babel import _, get_locale
-from guess_language import guess_language
 from app import db
 from app.main.forms import EditProfileForm, PostForm
 from app.models import User, Post
-from app.translate import translate
 from app.main import bp
 
 
@@ -25,11 +23,7 @@ from app.main import bp
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        language = guess_language(form.post.data)
-        if language == 'UNKNOWN' or len(language) > 5:
-            language = ''
-        post = Post(body=form.post.data, author=current_user,
-                    language=language)
+        post = Post(body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post is now live!')
@@ -98,14 +92,14 @@ def edit_profile():
 def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash('User %(usernames not found.', username=username))
+        flash('User %(username)s not found.', username=username)
         return redirect(url_for('main.index'))
     if user == current_user:
         flash('You cannot follow yourself!')
         return redirect(url_for('main.user', username=username))
     current_user.follow(user)
     db.session.commit()
-    flash('You are following %(usernames!', username=username))
+    flash('You are following %(usernames)s!', username=username)
     return redirect(url_for('main.user', username=username))
 
 
@@ -114,20 +108,12 @@ def follow(username):
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash('User %(usernames not found.', username=username))
+        flash('User %(username)s not found.', username=username)
         return redirect(url_for('main.index'))
     if user == current_user:
         flash('You cannot unfollow yourself!')
         return redirect(url_for('main.user', username=username))
     current_user.unfollow(user)
     db.session.commit()
-    flash('You are not following %(usernames.', username=username))
+    flash('You are not following %(usernames)s.', username=username)
     return redirect(url_for('main.user', username=username))
-
-
-@bp.route('/translate', methods=['POST'])
-@login_required
-def translate_text():
-    return jsonify({'text': translate(request.form['text'],
-                                      request.form['source_language'],
-                                      request.form['dest_language'])})
