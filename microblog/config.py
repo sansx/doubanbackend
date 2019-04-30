@@ -14,6 +14,7 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_USE_SSL=os.environ.get('MAIL_USE_SSL')
     ADMINS = ['646924078@qq.com']
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
 
 
 
