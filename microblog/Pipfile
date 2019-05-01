@@ -18,7 +18,7 @@ flask-mail = "*"
 pyjwt = "*"
 flask-bootstrap = "*"
 flask-moment = "*"
-elasticsearch = "*"
+elasticsearch = "==6.3.1"
 
 [requires]
 python_version = "3.7"
