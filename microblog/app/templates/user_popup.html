@@ -10,7 +10,7 @@
             <small>
                 {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
                 {% if user.last_seen %}
-                <p>'Last seen on': 
+                <p>Last seen on: 
                    {{ moment(user.last_seen).format('lll') }}</p>
                 {% endif %}
                 <p>{{ '{count} followers'.format(count=user.followers.count()) }},

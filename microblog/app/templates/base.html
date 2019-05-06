@@ -81,6 +81,7 @@
                 function(event) {
                     // mouse in event handler
                     var elem = $(event.currentTarget);
+                    // $(elem).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
                     timer = setTimeout(function() {
                         timer = null;
                         xhr = $.ajax(
