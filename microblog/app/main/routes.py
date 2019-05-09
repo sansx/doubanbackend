@@ -169,7 +169,7 @@ def send_message(recipient):
 
 @bp.route('/messages')
 @login_required
-def message():
+def messages():
     current_user.last_message_read_time = datetime.utcnow()
     db.session.commit()
     page = request.args.get('page', 1, type=int)
