@@ -15,6 +15,6 @@ class Config(object):
     MAIL_USE_SSL=os.environ.get('MAIL_USE_SSL')
     ADMINS = ['646924078@qq.com']
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
-
+    REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'
 
 
