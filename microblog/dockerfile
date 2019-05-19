@@ -1,0 +1,11 @@
+FROM python:3.7-alpine
+ENV FLASK_RUN_HOST="0.0.0.0"
+RUN mkdir /code
+WORKDIR /code
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pipenv
+ADD . /code/
+RUN pipenv install --deploy --ignore-pipfile
+RUN pipenv run flask db upgrade
+RUN chmod 755 .
+CMD ["pipenv", "run", "flask", "run"]
+
