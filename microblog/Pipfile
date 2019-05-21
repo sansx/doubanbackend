@@ -21,6 +21,7 @@ flask-moment = "*"
 elasticsearch = "==6.3.1"
 rq = "*"
 pylint = "*"
+httpie = "*"
 
 [requires]
 python_version = "3.7"
