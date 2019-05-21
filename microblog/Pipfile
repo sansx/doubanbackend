@@ -20,6 +20,7 @@ flask-bootstrap = "*"
 flask-moment = "*"
 elasticsearch = "==6.3.1"
 rq = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.7"
