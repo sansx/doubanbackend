@@ -1,0 +1,27 @@
+[[source]]
+name = "douban"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+flask = "*"
+flask-login = "*"
+flask-migrate = "*"
+flask-sqlalchemy = "*"
+flask-wtf = "*"
+python-dotenv = "*"
+sqlalchemy = "*"
+wtforms = "*"
+flask-mail = "*"
+pyjwt = "*"
+flask-bootstrap = "*"
+flask-moment = "*"
+elasticsearch = "==6.3.1"
+rq = "*"
+pylint = "*"
+httpie = "*"
+
+[requires]
+python_version = "3.7"
