@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "669323fdca20be311b108e4785558a8b8e401bb94cf0c777a36533e57e3317d8"
+            "sha256": "bec483a84b508244cb0297aced11bc11382d45ab8dc5f00a5e85bc03a37a6b73"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -56,14 +56,6 @@
             ],
             "version": "==7.0"
         },
-        "colorama": {
-            "hashes": [
-                "sha256:05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d",
-                "sha256:f8ac84de7840f5b9c4e3347b3c1eaa50f7e49c2b07596221daec5edaabbd7c48"
-            ],
-            "markers": "sys_platform == 'win32'",
-            "version": "==0.4.1"
-        },
         "dominate": {
             "hashes": [
                 "sha256:4076735c0745fe771e57b2313dbb4bfeec42731816ee23cee509f66e8912aa51",
@@ -93,6 +85,14 @@
             ],
             "index": "pypi",
             "version": "==3.3.7.1"
+        },
+        "flask-httpauth": {
+            "hashes": [
+                "sha256:0149953720489407e51ec24bc2f86273597b7973d71cd51f9443bd0e2a89bd72",
+                "sha256:6ef8b761332e780f9ff74d5f9056c2616f52babc1998b01d9f361a1e439e61b9"
+            ],
+            "index": "pypi",
+            "version": "==3.3.0"
         },
         "flask-login": {
             "hashes": [
