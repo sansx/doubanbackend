@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a95fc0a9dde5e4f4ecf8fc290f92117548eee015c6b6d34c8586179559cb2d8c"
+            "sha256": "1c58cd0aebd427ab2e56c0f7bb3312cac000e3e047067f98fabfd03096832246"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -335,9 +335,9 @@
         },
         "mako": {
             "hashes": [
-                "sha256:889c7f16d5388092d4c585cf9def19cad089e9f848a7c40e03394553048362a6"
+                "sha256:0cfa65de3a835e87eeca6ac856b3013aade55f49e32515f65d999f91a2324162"
             ],
-            "version": "==1.0.11"
+            "version": "==1.0.12"
         },
         "markupsafe": {
             "hashes": [
@@ -532,10 +532,9 @@
         },
         "twisted": {
             "hashes": [
-                "sha256:1708e1928ae84ec9d3ebab0d427e20e1e38ff721b15bbced476d047d4a43abbe",
-                "sha256:3716eca1c80ef88729a85e9a70f09acce8df2adf7c58590d54c94f383945bc47"
+                "sha256:fa2c04c2d68a9be7fc3975ba4947f653a57a656776f24be58ff0fe4b9aaf3e52"
             ],
-            "version": "==19.2.0"
+            "version": "==19.2.1"
         },
         "typed-ast": {
             "hashes": [
@@ -634,5 +633,28 @@
             "version": "==4.6.0"
         }
     },
-    "develop": {}
+    "develop": {
+        "autopep8": {
+            "hashes": [
+                "sha256:4d8eec30cc81bc5617dbf1218201d770dc35629363547f17577c61683ccfb3ee"
+            ],
+            "index": "douban",
+            "version": "==1.4.4"
+        },
+        "pep8": {
+            "hashes": [
+                "sha256:b22cfae5db09833bb9bd7c8463b53e1a9c9b39f12e304a8d0bba729c501827ee",
+                "sha256:fe249b52e20498e59e0b5c5256aa52ee99fc295b26ec9eaa85776ffdb9fe6374"
+            ],
+            "index": "douban",
+            "version": "==1.7.1"
+        },
+        "pycodestyle": {
+            "hashes": [
+                "sha256:95a2219d12372f05704562a14ec30bc76b05a5b297b21a5dfe3f6fac3491ae56",
+                "sha256:e40a936c9a450ad81df37f549d676d127b1b66000a6c500caa2b085bc0ca976c"
+            ],
+            "version": "==2.5.0"
+        }
+    }
 }
