@@ -15,3 +15,7 @@ class TutorialItem(scrapy.Item):
     link = scrapy.Field()
     desc = scrapy.Field()
     pass
+
+
+class DoubanMovie(scrapy.Item):
+     title = scrapy.Field()

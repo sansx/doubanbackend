@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import re
-
+from tutorial.items import DoubanMovie 
 
 class DoubantopSpider(scrapy.Spider):
     name = 'doubanTop'
@@ -18,9 +18,11 @@ class DoubantopSpider(scrapy.Spider):
 
     def parse(self, res):
         for href in res.css(".item>.info>.hd>a>span:first-child::text").extract():
-            print("".join(href.split()))
-            self.count = self.count + 1
-            # yield href
+            title = "".join(href.split())
+            movie = DoubanMovie()
+            print(title)
+            movie["title"] = title
+            yield movie
             pass
         for href in res.css(".thispage").xpath("./following-sibling::*[1]/@href").extract():
             if href :
