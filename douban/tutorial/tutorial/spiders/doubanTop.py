@@ -20,12 +20,12 @@ class DoubantopSpider(scrapy.Spider):
         for href in res.css(".item>.info>.hd>a>span:first-child::text").extract():
             title = "".join(href.split())
             movie = DoubanMovie()
-            print(title)
             movie["title"] = title
             yield movie
             pass
         for href in res.css(".thispage").xpath("./following-sibling::*[1]/@href").extract():
             if href :
-                yield scrapy.Request(res.urljoin(href), headers=self.headers)
+                # yield scrapy.Request(res.urljoin(href), headers=self.headers)
+                pass
 
         pass
