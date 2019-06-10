@@ -25,7 +25,7 @@ class DoubantopSpider(scrapy.Spider):
             pass
         for href in res.css(".thispage").xpath("./following-sibling::*[1]/@href").extract():
             if href :
-                # yield scrapy.Request(res.urljoin(href), headers=self.headers)
+                yield scrapy.Request(res.urljoin(href), headers=self.headers)
                 pass
 
         pass
