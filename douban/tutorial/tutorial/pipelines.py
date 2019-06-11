@@ -20,13 +20,14 @@ class doubanMV(Base):
     __tablename__ = 'dbMovie'
     id = Column(Integer, primary_key=True)
     title = Column(Text)
-    rate = Column(Float(4,2))
+    rate = Column(Float(4, 2))
     rateNum = Column(Integer)
 
 
 class TutorialPipeline(object):
     def open_spider(self, spider):
-        print("mysql+pymysql://root:{password}@localhost:3306/test".format(password=con().password))
+        print(
+            "mysql+pymysql://root:{password}@localhost:3306/test".format(password=con().password))
         engine = create_engine(
             "mysql+pymysql://{user}:{password}@{host}:{port}/{database}".format(user=con().user, password=con().password, host=con().host,
                                                                                 port=con().port, database=con().database), max_overflow=5)
@@ -40,13 +41,14 @@ class TutorialPipeline(object):
 
     def process_item(self, item, spider):
         print(item['title'], spider)
-        ret = self.session.query(doubanMV).filter(doubanMV.title == item['title'])
+        ret = self.session.query(doubanMV).filter(
+            doubanMV.title == item['title'])
+        num = re.match(r"\d+",item['rateNum'])[0]
         if ret.first() is None:
-            movie = doubanMV(title=item['title'])
+            movie = doubanMV(title=item['title'],
+                             rate=item['rate'], rateNum=num)
             self.session.add(movie)
         else:
-            num = re.match(r"\d+",item['rateNum'])[0]
-            print()
             movie = ret.update({"rate": item['rate'], "rateNum": num})
         self.session.commit()
         return item
