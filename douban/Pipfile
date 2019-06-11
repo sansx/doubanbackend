@@ -25,6 +25,7 @@ rq = "*"
 pylint = "*"
 httpie = "*"
 scrapy = "*"
+pymysql = "*"
 
 [requires]
 python_version = "3.7"

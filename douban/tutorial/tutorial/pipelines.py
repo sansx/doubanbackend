@@ -5,11 +5,12 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymysql
+import re
 from tutorial.config import Config as con
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import (create_engine, Table, Column, Integer,
-                        String, MetaData, ForeignKey, Text
+                        String, MetaData, ForeignKey, Text, Float
                         )
 
 Base = declarative_base()
@@ -19,13 +20,16 @@ class doubanMV(Base):
     __tablename__ = 'dbMovie'
     id = Column(Integer, primary_key=True)
     title = Column(Text)
+    rate = Column(Float(4,2))
+    rateNum = Column(Integer)
 
 
 class TutorialPipeline(object):
     def open_spider(self, spider):
-        print("mysql+pymysql://root:{}@localhost:3306/test".format(con().passWord))
+        print("mysql+pymysql://root:{password}@localhost:3306/test".format(password=con().password))
         engine = create_engine(
-            "mysql+pymysql://xiath:{}@192.168.1.103:3306/test".format(con().passWord), max_overflow=5)
+            "mysql+pymysql://{user}:{password}@{host}:{port}/{database}".format(user=con().user, password=con().password, host=con().host,
+                                                                                port=con().port, database=con().database), max_overflow=5)
         metadata = MetaData()
         # 定义表
         Base.metadata.create_all(engine)
@@ -36,11 +40,15 @@ class TutorialPipeline(object):
 
     def process_item(self, item, spider):
         print(item['title'], spider)
-        ret = self.session.query(doubanMV).filter(doubanMV.title==item['title']).first()
-        if ret is None:
+        ret = self.session.query(doubanMV).filter(doubanMV.title == item['title'])
+        if ret.first() is None:
             movie = doubanMV(title=item['title'])
             self.session.add(movie)
-            self.session.commit()
+        else:
+            num = re.match(r"\d+",item['rateNum'])[0]
+            print()
+            movie = ret.update({"rate": item['rate'], "rateNum": num})
+        self.session.commit()
         return item
 
     def close_spider(self, spider):

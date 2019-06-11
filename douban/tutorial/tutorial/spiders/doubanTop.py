@@ -17,15 +17,22 @@ class DoubantopSpider(scrapy.Spider):
         yield scrapy.Request(self.start_urls[0], headers=self.headers)
 
     def parse(self, res):
-        for href in res.css(".item>.info>.hd>a>span:first-child::text").extract():
-            title = "".join(href.split())
+        for item in res.css(".item"):
             movie = DoubanMovie()
-            movie["title"] = title
+            title = item.css(".info>.hd>a>span:first-child::text").extract()
+            rate = item.css(".rating_num::text").extract()
+            rateNum = item.css(".star>span:last-child::text").extract()
+            print(rateNum)
+            movie["title"] = self.clearSpace(title[0])
+            movie["rate"] = rate[0]
+            movie["rateNum"] = rateNum[0]
             yield movie
-            pass
+            
         for href in res.css(".thispage").xpath("./following-sibling::*[1]/@href").extract():
             if href :
                 yield scrapy.Request(res.urljoin(href), headers=self.headers)
                 pass
 
-        pass
+
+    def clearSpace(self, text):
+        return "".join(text.split())

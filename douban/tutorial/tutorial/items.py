@@ -18,4 +18,6 @@ class TutorialItem(scrapy.Item):
 
 
 class DoubanMovie(scrapy.Item):
-     title = scrapy.Field()
+    title = scrapy.Field()
+    rate = scrapy.Field()
+    rateNum = scrapy.Field()
