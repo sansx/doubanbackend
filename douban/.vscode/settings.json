@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": ".venv/bin/python",
+    "python.pythonPath": "E:\\pystash\\douban\\.venv\\Scripts\\python.exe",
     "python.formatting.provider": "autopep8",
     "python.linting.pylintEnabled": false,
     "python.linting.pep8Enabled": true,
