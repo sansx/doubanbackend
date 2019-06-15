@@ -8,3 +8,17 @@ class dbmovie(db.Model):
 
     def __repr__(self):
         return '<dbmovie {}>'.format(self.title)    
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'title': self.title,
+            # 'rate': self.rate,
+            'rateNum': self.rateNum
+        }
+
+        print(data)
+
+        return data
+
+
