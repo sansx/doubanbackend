@@ -3,9 +3,9 @@ from app import db
 
 class PaginatedAPIMixin(object):
     @staticmethod
-    def to_collection_dict(model, page, per_page, order="id", **kwargs):
-        print(model.__dict__)
-        resources = model.query.order_by(getattr(model, order )).paginate(page, per_page, False)
+    def to_collection_dict(model, page, per_page, order="id", isDesc=False, **kwargs):
+        resources = model.query.order_by(getattr(model, order) if isDesc else getattr(
+            model, order).desc()).paginate(page, per_page, False)
         data = {
             'items': [item.to_dict() for item in resources.items],
             'page': page,
