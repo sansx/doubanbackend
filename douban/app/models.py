@@ -1,6 +1,21 @@
 from app import db
 
-class dbmovie(db.Model):
+class PaginatedAPIMixin(object):
+    @staticmethod
+    def to_collection_dict(query, page, per_page, endpoint, **kwargs):
+        resources = query.paginate(page, per_page, False)
+        data = {
+            'items': [item.to_dict() for item in resources.items],
+            '_meta': {
+                'page': page,
+                'per_page': per_page,
+                'total_pages': resources.pages,
+                'total_items': resources.total
+            }
+        }
+        return data
+
+class dbmovie( PaginatedAPIMixin, db.Model ):
     id = db.Column( db.Integer, primary_key=True )
     title = db.Column( db.Text )
     rate = db.Column( db.Float(4,2) )
@@ -13,7 +28,7 @@ class dbmovie(db.Model):
         data = {
             'id': self.id,
             'title': self.title,
-            # 'rate': self.rate,
+            'rate': float(self.rate),
             'rateNum': self.rateNum
         }
 
