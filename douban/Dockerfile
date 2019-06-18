@@ -4,4 +4,5 @@ COPY . /spider/
 WORKDIR /spider/
 RUN pipenv install --deploy --ignore-pipfile
 WORKDIR /spider/tutorial
-CMD ["scrapy","crawl","dmoz"]
+EXPOSE 8000
+CMD ["pipenv", "run", "gunicorn", "-b", ":5000", "--access-logfile", "-", "--error-logfile", "-", "doubanAPI:app" ]
