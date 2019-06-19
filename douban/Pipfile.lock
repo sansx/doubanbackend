@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "00d604e317d3fab2bce33a9c271739f6da47823a69b0cf41642b8e3bc9cab9dc"
+            "sha256": "d0eb96da2a00889510b86dd193d39126b818c50159a9c4cce2c71f189f79dee1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -58,10 +58,10 @@
         },
         "certifi": {
             "hashes": [
-                "sha256:59b7658e26ca9c7339e00f8f4636cdfe59d34fa37b9b04f6f9e9926b3cece1a5",
-                "sha256:b26104d6835d1f5e49452a26eb2ff87fe7090b89dfcaee5ea2212697e1e1d7ae"
+                "sha256:046832c04d4e752f37383b628bc601a7ea7211496b4638f6514d0e5b9acc4939",
+                "sha256:945e3ba63a0b9f577b1395204e13c3a231f9bc0223888be653286534e5873695"
             ],
-            "version": "==2019.3.9"
+            "version": "==2019.6.16"
         },
         "cffi": {
             "hashes": [
@@ -199,11 +199,11 @@
         },
         "flask-moment": {
             "hashes": [
-                "sha256:5ff8a73487e2e11913718b6a972814a130b4aa454198195b2004b71b3a2c07b7",
-                "sha256:8379acdc9cda1227573ae52aac2e5b4b391e77ed300c70d49b0a929d0aa76680"
+                "sha256:bcdc49734a37e4411868436fcde326520e5012b14948cb1766f42e1e6d95f632",
+                "sha256:cef39ab9a0fd55aa4142c0292a6cb0661547cf17ac13cf2d3cafbec1d1a95931"
             ],
             "index": "douban",
-            "version": "==0.7.0"
+            "version": "==0.8.0"
         },
         "flask-sqlalchemy": {
             "hashes": [
@@ -220,6 +220,14 @@
             ],
             "index": "douban",
             "version": "==0.14.2"
+        },
+        "gunicorn": {
+            "hashes": [
+                "sha256:aa8e0b40b4157b36a5df5e599f45c9c76d6af43845ba3b3b0efe2c70473c2471",
+                "sha256:fa2662097c66f920f53f70621c6c58ca4a3c4d3434205e608e121b5b3b71f4f3"
+            ],
+            "index": "douban",
+            "version": "==19.9.0"
         },
         "httpie": {
             "hashes": [
